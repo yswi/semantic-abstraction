@@ -11,18 +11,18 @@ from tqdm import tqdm
 from transformers import get_scheduler
 from argparse import ArgumentParser
 import random
-from CLIP.clip import saliency_configs
-from net import VirtualGrid
+from .CLIP.clip import saliency_configs
+from .net import VirtualGrid
 from tensorboardX import SummaryWriter
 from torch.nn.parallel import DistributedDataParallel
 import torch.distributed as dist
 from torch.utils.data.distributed import DistributedSampler
 from torch.utils.data import DataLoader
 from torchtyping import TensorType, patch_typeguard
-from arm.optim.lamb import Lamb
+from .arm.optim.lamb import Lamb
 from typeguard import typechecked
 import logging
-from dataset import SceneUnderstandDataset
+from .dataset import SceneUnderstandDataset
 from rich.logging import RichHandler
 
 logging.basicConfig(

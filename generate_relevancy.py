@@ -4,11 +4,11 @@ import h5py
 import torch
 from tqdm import tqdm
 import ray
-from utils import write_to_hdf5
+from .utils import write_to_hdf5
 from filelock import FileLock
 import numpy as np
-from CLIP.clip import ClipWrapper, saliency_configs, imagenet_templates
-from dataset import synonyms, deref_h5py
+from .CLIP.clip import ClipWrapper, saliency_configs, imagenet_templates
+from .dataset import synonyms, deref_h5py
 import typer
 import imageio
 from matplotlib import pyplot as plt
@@ -394,24 +394,25 @@ def dataset(
 @app.command()
 def image(
     file_path: str = typer.Argument(
-        default="matterport.png", help="path of image file"
+        default="dataset/scoop_spatula_/t_000/rgb/rgb_000_000.png", help="path of image file"
     ),
     labels: List[str] = typer.Option(
         default=[
-            "basketball jersey",
-            "nintendo switch",
-            "television",
-            "ping pong table",
-            "vase",
-            "fireplace",
-            "abstract painting of a vespa",
-            "carpet",
-            "wall",
+            "sponge", "dust","robot", "table", "wall"
+            "wipe",
+            "desk",
+            "with",
+            "a",
+            # "vase",
+            # "fireplace",
+            # "abstract painting of a vespa",
+            # "carpet",
+            # "wall",
         ],
         help='list of object categories (e.g.: "nintendo switch")',
     ),
     prompts: List[str] = typer.Option(
-        default=["a photograph of a {} in a home."],
+        default=["a photograph of a {}."],
         help="prompt template to use with CLIP.",
     ),
 ):
@@ -422,12 +423,15 @@ def image(
     assert img.dtype == np.uint8
     h, w, c = img.shape
     start = time()
-    grads = ClipWrapper.get_clip_saliency(
-        img=img,
-        text_labels=np.array(labels),
-        prompts=prompts,
-        **saliency_configs["ours"](h),
-    )[0]
+
+    for _ in range(10):
+        grads = ClipWrapper.get_clip_saliency(
+            img=img,
+            text_labels=np.array(labels),
+            prompts=prompts,
+            **saliency_configs["ours"](h),
+        )[0]
+        print(torch.sum(grads))
     print(f"get gradcam took {float(time() - start)} seconds", grads.shape)
     grads -= grads.mean(axis=0)
     grads = grads.cpu().numpy()

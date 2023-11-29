@@ -1,8 +1,8 @@
 import numpy as np
 import torch
 from torch.utils.data import Dataset
-from fusion import TSDFVolume
-from point_cloud import (
+from .fusion import TSDFVolume
+from .point_cloud import (
     check_pts_in_frustum,
     filter_pts_bounds,
     get_pointcloud,

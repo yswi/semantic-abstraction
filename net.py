@@ -12,8 +12,8 @@ from torch.nn.parameter import Parameter
 from torch.nn.functional import grid_sample
 from torch_scatter import scatter
 import numpy as np
-from unet3d import ResidualUNet3D
-from CLIP.clip import ClipWrapper
+from .unet3d import ResidualUNet3D
+from .CLIP.clip import ClipWrapper
 from torchtyping import TensorType, patch_typeguard
 from typeguard import typechecked
 
