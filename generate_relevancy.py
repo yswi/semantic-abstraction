@@ -12,7 +12,6 @@ from .dataset import synonyms, deref_h5py
 import typer
 import imageio
 from matplotlib import pyplot as plt
-import cv2
 from time import time
 
 app = typer.Typer()
@@ -394,12 +393,16 @@ def dataset(
 @app.command()
 def image(
     file_path: str = typer.Argument(
-        default="dataset/scoop_spatula_/t_000/rgb/rgb_000_000.png", help="path of image file"
+        default="dataset/scoop_spatula_/t_000/rgb/rgb_000_000.png",
+        help="path of image file",
     ),
     labels: List[str] = typer.Option(
         default=[
-            "sponge", "dust","robot", "table", "wall"
-            "wipe",
+            "sponge",
+            "dust",
+            "robot",
+            "table",
+            "wall" "wipe",
             "desk",
             "with",
             "a",

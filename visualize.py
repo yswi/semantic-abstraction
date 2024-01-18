@@ -164,7 +164,6 @@ def process_batch_ovssc(
     num_pts_per_pass: int = int(2**20),
     cutoff: float = -3.0,
 ) -> Dict[str, torch.Tensor]:
-
     grid_points = get_sample_points(
         sampling_shape=sampling_shape, scene_bounds=scene_bounds, device=device
     )
@@ -360,7 +359,6 @@ def process_batch_vool(
     sampling_shape: Tuple[int, int, int] = (240, 240, 240),
     num_pts_per_pass: int = int(2**20),
 ) -> Tuple[Dict[str, torch.Tensor], torch.Tensor]:
-
     grid_points = get_sample_points(
         sampling_shape=sampling_shape, scene_bounds=scene_bounds, device=device
     )
@@ -485,6 +483,7 @@ def vool_inference(
         verts=batch["input_xyz_pts"].cpu().numpy()[indices],
         colors=batch["input_rgb_pts"][indices],
     )
+
 
 # color palette from https://sashamaps.net/docs/resources/20-colors/
 twenty_color_palette = (

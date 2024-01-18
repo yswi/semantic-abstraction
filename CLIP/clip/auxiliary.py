@@ -144,7 +144,6 @@ def multi_head_attention_forward(
                 k = None
                 v = None
             else:
-
                 # This is inline in_proj function with in_proj_weight and in_proj_bias
                 _b = in_proj_bias
                 _start = embed_dim

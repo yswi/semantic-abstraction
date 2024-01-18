@@ -38,7 +38,6 @@ class ClipGradcam(nn.Module):
         positive_attn_only=False,
         **kwargs
     ):
-
         super(ClipGradcam, self).__init__()
         self.clip_model_name = clip_model_name
         self.model, self.preprocess = load(clip_model_name, device=device, **kwargs)
