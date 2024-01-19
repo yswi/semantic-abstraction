@@ -20,7 +20,7 @@ saliency_configs = {
     "ours": lambda img_dim: {
         "distractor_labels": {},
         "horizontal_flipping": True,
-        "augmentations": 5,
+        "augmentations": 0,
         "imagenet_prompt_ensemble": False,
         "positive_attn_only": True,
         "cropping_augmentations": [
